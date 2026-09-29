@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Legal Aid Request</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Legal Aid & Rights Awareness Portal</h1>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/rights">Rights</a>
+            <a href="/laws">Laws</a>
+            <a href="/contact">Contact</a>
+            <a href="/legal-aid">Legal Aid</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Request Legal Aid</h2>
+
+            <p>
+                Fill in the form below to request legal assistance.
+            </p>
+
+            <form method="POST" action="/legal-aid">
+
+                <label for="name">Name</label>
+                <input type="text" name="name" value="{{ session.get('user_name', '') }}" readonly required>
+
+                <label for="email">Email</label>
+                <input type="email" name="email" value="{{ session.get('user_email', '') }}" readonly required>
+
+                <label for="phone">Phone Number</label>
+                <input type="text" name="phone" value="{{ session.get('user_phone', '') }}" readonly required>
+
+                <label for="category">Legal Issue</label>
+                <select id="category" name="category" required>
+                    <option value="">Select an issue</option>
+                    <option value="Family">Family Law</option>
+                    <option value="Consumer">Consumer Rights</option>
+                    <option value="Property">Property Dispute</option>
+                    <option value="Employment">Employment Issue</option>
+                    <option value="Cyber Crime">Cyber Crime</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="description">Describe Your Problem</label>
+                <textarea id="description"
+                          name="description"
+                          placeholder="Explain your legal problem"
+                          rows="6"
+                          required></textarea>
+
+                <button type="submit">Submit Request</button>
+
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Legal Aid & Rights Awareness Portal</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

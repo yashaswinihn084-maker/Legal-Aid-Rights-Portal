@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Legal Rights - Legal Aid Portal</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f7fb;
+            color: #333;
+        }
+
+        header {
+            background-color: #17365d;
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .container h2 {
+            text-align: center;
+            color: #17365d;
+            margin-bottom: 30px;
+        }
+
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .right-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .right-card h3 {
+            color: #17365d;
+            margin-bottom: 15px;
+        }
+
+        .right-card p {
+            line-height: 1.6;
+        }
+
+        footer {
+            background-color: #17365d;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Legal Aid Portal</h1>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/rights">Rights</a>
+            <a href="/laws">Laws</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <h2>Know Your Legal Rights</h2>
+        <input
+    type="text"
+    id="rightSearch"
+    placeholder="Search for a legal right..."
+    onkeyup="searchRights()"
+    style="width:100%; padding:12px; margin-bottom:25px; border:1px solid #ccc; border-radius:5px; font-size:16px;"
+>
+
+        <div class="rights-grid">
+
+            <div class="right-card">
+                <h3>Right to Equality</h3>
+                <p>
+                    Every person is entitled to equality before the law
+                    and equal protection of the laws.
+                </p>
+            </div>
+
+            <div class="right-card">
+                <h3>Right to Freedom</h3>
+                <p>
+                    Citizens have constitutional freedoms subject to
+                    reasonable restrictions provided by law.
+                </p>
+            </div>
+
+            <div class="right-card">
+                <h3>Right Against Exploitation</h3>
+                <p>
+                    The Constitution provides protections against
+                    trafficking and certain forms of forced labour.
+                </p>
+            </div>
+
+            <div class="right-card">
+                <h3>Right to Constitutional Remedies</h3>
+                <p>
+                    Constitutional remedies allow individuals to approach
+                    appropriate courts for enforcement of fundamental rights.
+                </p>
+            </div>
+
+            <div class="right-card">
+                <h3>Right to Legal Aid</h3>
+                <p>
+                    Eligible persons can receive legal services through
+                    legal services authorities according to applicable law
+                    and eligibility rules.
+                </p>
+            </div>
+
+            <div class="right-card">
+                <h3>Consumer Rights</h3>
+                <p>
+                    Consumers have legal protections relating to goods
+                    and services under applicable consumer protection laws.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Legal Aid & Rights Awareness Portal</p>
+    </footer>
+<script>
+function searchRights() {
+    let input = document.getElementById("rightSearch").value.toLowerCase();
+    let cards = document.getElementsByClassName("right-card");
+
+    for (let i = 0; i < cards.length; i++) {
+        let text = cards[i].innerText.toLowerCase();
+
+        if (text.includes(input)) {
+            cards[i].style.display = "block";
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+</body>
+</html>

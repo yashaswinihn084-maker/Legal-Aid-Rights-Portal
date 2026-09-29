@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Laws - Legal Aid Portal</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f7fb;
+            color: #333;
+        }
+
+        header {
+            background-color: #17365d;
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .container h2 {
+            text-align: center;
+            color: #17365d;
+            margin-bottom: 30px;
+        }
+
+        .law-card {
+            background-color: white;
+            margin-bottom: 20px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .law-card h3 {
+            color: #17365d;
+            margin-bottom: 12px;
+        }
+
+        .law-card p {
+            line-height: 1.6;
+        }
+
+        footer {
+            background-color: #17365d;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Legal Aid Portal</h1>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/rights">Rights</a>
+            <a href="/laws">Laws</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <h2>Important Laws</h2>
+        <input
+    type="text"
+    id="lawSearch"
+    placeholder="Search for a law..."
+    onkeyup="searchLaws()"
+    style="width:100%; padding:12px; margin-bottom:25px; border:1px solid #ccc; border-radius:5px; font-size:16px;"
+>
+
+        <div class="law-card">
+            <h3>Constitution of India</h3>
+            <p>
+                The Constitution of India is the supreme legal framework
+                of the country. It establishes the structure of government
+                and provides fundamental rights and duties.
+            </p>
+        </div>
+
+        <div class="law-card">
+            <h3>Consumer Protection Act, 2019</h3>
+            <p>
+                This law provides a framework for protecting consumer
+                interests and addressing consumer complaints and disputes.
+            </p>
+        </div>
+
+        <div class="law-card">
+            <h3>Right to Information Act, 2005</h3>
+            <p>
+                The Right to Information framework allows eligible citizens
+                to seek information from public authorities, subject to
+                the provisions and exemptions of the law.
+            </p>
+        </div>
+
+        <div class="law-card">
+            <h3>Legal Services Authorities Act, 1987</h3>
+            <p>
+                This law provides the legal framework for legal services
+                authorities and the provision of free legal services to
+                eligible persons.
+            </p>
+        </div>
+
+        <div class="law-card">
+            <h3>Information Technology Act, 2000</h3>
+            <p>
+                The Information Technology Act provides a legal framework
+                relating to electronic records, electronic transactions
+                and specified offences involving computer resources.
+            </p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Legal Aid & Rights Awareness Portal</p>
+    </footer>
+<script>
+function searchLaws() {
+    let input = document.getElementById("lawSearch").value.toLowerCase();
+    let cards = document.getElementsByClassName("law-card");
+
+    for (let i = 0; i < cards.length; i++) {
+        let text = cards[i].innerText.toLowerCase();
+
+        if (text.includes(input)) {
+            cards[i].style.display = "block";
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+}
+</script>
+</body>
+
+</html>
