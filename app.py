@@ -22,19 +22,14 @@ db = get_db()
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
-    if request.method == "POST":
+       if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
-
-        db_conn = get_db()
-if db_conn is None:
-    return "Database not available on live server"
-cursor = db_conn.cursor()
-
-        sql = ""
+        cursor = db.cursor()
+        sql = """
         SELECT * FROM users
         WHERE email = %s AND password = %s
-        ""
+        """
 
         cursor.execute(sql, (email, password))
         user = cursor.fetchone()
