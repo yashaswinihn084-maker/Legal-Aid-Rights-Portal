@@ -224,7 +224,7 @@ def update_status(request_id):
     if request.method == "POST":
         status = request.form["status"]
 
-         db_conn = get_db()
+        db_conn = get_db()
         if db_conn is None:
             return "Database not available on live server"
         cursor = db_conn.cursor()
@@ -234,7 +234,6 @@ def update_status(request_id):
         SET status = %s
         WHERE id = %s
         """
-
         cursor.execute(sql, (status, request_id))
         db_conn.commit()
         cursor.close()
@@ -242,7 +241,7 @@ def update_status(request_id):
         return redirect(url_for("admin"))
 
     return render_template("update_status.html")
-
+    
 @app.route("/delete-request/<int:request_id>")
 def delete_request(request_id):
     if not session.get("admin_logged_in"):
