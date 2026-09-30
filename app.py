@@ -43,21 +43,21 @@ def login():
 
 @app.route("/user-dashboard")
 def user_dashboard():
-
     if not session.get("user_logged_in"):
         return redirect(url_for("login"))
 
     user_email = session.get("user_email")
 
     db_conn = get_db()
-if db_conn is None:
-    return "Database not available on live server"
-cursor = db_conn.cursor()
+    if db_conn is None:
+        return "Database not available on live server"
+    cursor = db_conn.cursor()
 
-sql = """
-SELECT * FROM legal_aid_requests
-WHERE email = %s
-"""
+    sql = """
+    SELECT * FROM legal_aid_requests
+    WHERE email = %s
+    """
+
     cursor.execute(sql, (user_email,))
     requests = cursor.fetchall()
     cursor.close()
