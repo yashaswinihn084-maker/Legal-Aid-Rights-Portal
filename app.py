@@ -1,21 +1,27 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-import mysql.connector
+import psycopg2
 import os
+from urllib.parse import urlparse
 
 app = Flask(__name__)
 app.secret_key = "legal_aid_secret_key_2026"
 
 def get_db():
-    mysql.connector.connect(
-        host=os.getenv("DB_HOST", "localhost"),
-        user=os.getenv("DB_USER", "root"),
-        password=os.getenv("DB_PASSWORD", "26122006"),
-        database=os.getenv("DB_NAME", "legal_aid_portal")
-    )
+    try:
+        url = os.getenv("DATABASE_URL")
+        result = urlparse(url)
+        conn = psycopg2.connect(
+            database=result.path[1:],
+            user=result.username,
+            password=result.password,
+            host=result.hostname,
+            port=result.port,
+            sslmode='require'
+        )
+        return conn
     except Exception as e:
         print(f"DB connection failed: {e}")
         return None
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
     user = None
