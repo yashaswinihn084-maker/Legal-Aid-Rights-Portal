@@ -6,13 +6,12 @@ app = Flask(__name__)
 app.secret_key = "legal_aid_secret_key_2026"
 
 def get_db():
-    try:
-        return mysql.connector.connect(
-            host=os.getenv("DB_HOST", "localhost"),
-            user=os.getenv("DB_USER", "root"),
-            password=os.getenv("DB_PASSWORD", "26122006"),
-            database=os.getenv("DB_NAME", "legal_aid_portal")
-        )
+    mysql.connector.connect(
+        host=os.getenv("DB_HOST", "localhost"),
+        user=os.getenv("DB_USER", "root"),
+        password=os.getenv("DB_PASSWORD", "26122006"),
+        database=os.getenv("DB_NAME", "legal_aid_portal")
+    )
     except Exception as e:
         print(f"DB connection failed: {e}")
         return None
