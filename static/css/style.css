@@ -11,7 +11,6 @@ body {
 }
 
 /* Header */
-
 header {
     background-color: #17365d;
     color: white;
@@ -38,7 +37,6 @@ nav a:hover {
 }
 
 /* Hero Section */
-
 .hero {
     background-color: #e8f1ff;
     text-align: center;
@@ -57,7 +55,6 @@ nav a:hover {
 }
 
 /* Button */
-
 .button {
     display: inline-block;
     background-color: #17365d;
@@ -72,7 +69,6 @@ nav a:hover {
 }
 
 /* Features */
-
 .features {
     padding: 50px 30px;
     text-align: center;
@@ -114,7 +110,6 @@ nav a:hover {
 }
 
 /* Footer */
-
 footer {
     background-color: #17365d;
     color: white;
@@ -123,25 +118,61 @@ footer {
     margin-top: 30px;
 }
 
+/* Legal Aid Form */
+main section {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+main section h2 {
+  color: #17365d;
+  margin-bottom: 10px;
+}
+form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+form input, form select, form textarea {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+form button {
+  margin-top: 20px;
+  padding: 12px;
+  background: #17365d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+}
+form button:hover {
+  background: #0d2745;
+}
+
 /* Mobile Responsive Design */
-
 @media (max-width: 768px) {
-
     header {
         flex-direction: column;
         gap: 15px;
         padding: 20px;
     }
-
     nav a {
         margin: 5px;
         display: inline-block;
     }
-
     .hero h2 {
         font-size: 30px;
     }
-
     .card {
         width: 90%;
     }
