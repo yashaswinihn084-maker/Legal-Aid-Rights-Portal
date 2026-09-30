@@ -195,7 +195,7 @@ def admin_messages():
     if not session.get("admin_logged_in"):
         return redirect(url_for("admin_login"))
 
-    db_conn = get_db()
+        db_conn = get_db()
 if db_conn is None:
     return "Database not available on live server"
 cursor = db_conn.cursor()
