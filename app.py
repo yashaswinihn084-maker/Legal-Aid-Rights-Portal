@@ -19,28 +19,30 @@ def get_db():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    user = None
     if request.method == "POST":
-        db = get_db()
         email = request.form["email"]
         password = request.form["password"]
-        cursor = db.cursor()
-        sql = """
-        SELECT * FROM users
-        WHERE email = %s AND password = %s
-        """
-        cursor.execute(sql, (email, password))
+
+        db_conn = get_db()
+        if db_conn is None:
+            return "Database not available on live server"
+        cursor = db_conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE email=%s AND password=%s", (email, password))
         user = cursor.fetchone()
         cursor.close()
-    if user:
-        session["user_logged_in"] = True
-        session["user_name"] = user[1]
-        session["user_email"] = user[2]
-        session["user_phone"] = user[3]
-        return redirect(url_for("user_dashboard"))
-    else:
-        return "Invalid email or password"
-    return render_template("login.html")
 
+        if user:
+            session["user_logged_in"] = True
+            session["user_name"] = user[1]
+            session["user_email"] = user[2]
+            session["user_phone"] = user[3]
+            return redirect(url_for("user_dashboard"))
+        else:
+            return "Invalid email or password"
+
+    return render_template("login.html")
+    
 @app.route("/")
 def home():
     return redirect(url_for("login"))
