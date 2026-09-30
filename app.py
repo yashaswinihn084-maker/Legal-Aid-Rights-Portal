@@ -1,15 +1,23 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import mysql.connector
+import os
 
 app = Flask(__name__)
 app.secret_key = "legal_aid_secret_key_2026"
 
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="26122006",
-    database="legal_aid_portal"
-)
+def get_db():
+    try:
+        return mysql.connector.connect(
+            host=os.getenv("DB_HOST", "localhost"),
+            user=os.getenv("DB_USER", "root"),
+            password=os.getenv("DB_PASSWORD", "26122006"),
+            database=os.getenv("DB_NAME", "legal_aid_portal")
+        )
+    except Exception as e:
+        print(f"DB connection failed: {e}")
+        return None
+
+db = get_db()
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -18,7 +26,10 @@ def login():
         email = request.form["email"]
         password = request.form["password"]
 
-        cursor = db.cursor()
+        db_conn = get_db()
+if db_conn is None:
+    return "Database not available on live server"
+cursor = db_conn.cursor()
 
         sql = """
         SELECT * FROM users
@@ -49,7 +60,10 @@ def user_dashboard():
 
     user_email = session.get("user_email")
 
-    cursor = db.cursor()
+    db_conn = get_db()
+if db_conn is None:
+    return "Database not available on live server"
+cursor = db_conn.cursor()
 
     sql = """
     SELECT * FROM legal_aid_requests
@@ -71,7 +85,10 @@ def register():
         phone = request.form["phone"]
         password = request.form["password"]
 
-        cursor = db.cursor()
+        db_conn = get_db()
+if db_conn is None:
+    return "Database not available on live server"
+cursor = db_conn.cursor()
 
         sql = """
         INSERT INTO users (name, email, phone, password)
@@ -116,7 +133,10 @@ def contact():
         subject = request.form["subject"]
         message = request.form["message"]
 
-        cursor = db.cursor()
+        db_conn = get_db()
+if db_conn is None:
+    return "Database not available on live server"
+cursor = db_conn.cursor()
 
         sql = """
         INSERT INTO contact_messages
@@ -144,7 +164,10 @@ def legal_aid():
         category = request.form["category"]
         description = request.form["description"]
 
-        cursor = db.cursor()
+        db_conn = get_db()
+if db_conn is None:
+    return "Database not available on live server"
+cursor = db_conn.cursor()
 
         sql = """
         INSERT INTO legal_aid_requests
@@ -161,6 +184,7 @@ def legal_aid():
         return "Your legal aid request has been submitted successfully."
 
     return render_template("legal_aid.html")
+
 @app.route("/admin-login", methods=["GET", "POST"])
 def admin_login():
 
@@ -182,7 +206,10 @@ def admin_messages():
     if not session.get("admin_logged_in"):
         return redirect(url_for("admin_login"))
 
-    cursor = db.cursor()
+    db_conn = get_db()
+if db_conn is None:
+    return "Database not available on live server"
+cursor = db_conn.cursor()
 
     cursor.execute("SELECT * FROM contact_messages")
 
@@ -197,7 +224,10 @@ def admin():
     if not session.get("admin_logged_in"):
         return redirect(url_for("admin_login"))
 
-    cursor = db.cursor()
+   db_conn = get_db()
+if db_conn is None:
+    return "Database not available on live server"
+cursor = db_conn.cursor()
     cursor.execute("SELECT * FROM legal_aid_requests")
     requests = cursor.fetchall()
     cursor.close()
@@ -226,7 +256,10 @@ def update_status(request_id):
     if request.method == "POST":
         status = request.form["status"]
 
-        cursor = db.cursor()
+        db_conn = get_db()
+if db_conn is None:
+    return "Database not available on live server"
+cursor = db_conn.cursor()
 
         sql = """
         UPDATE legal_aid_requests
@@ -248,7 +281,10 @@ def delete_request(request_id):
     if not session.get("admin_logged_in"):
         return redirect(url_for("admin_login"))
 
-    cursor = db.cursor()
+    db_conn = get_db()
+if db_conn is None:
+    return "Database not available on live server"
+cursor = db_conn.cursor()
 
     sql = "DELETE FROM legal_aid_requests WHERE id = %s"
 
