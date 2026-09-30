@@ -103,14 +103,12 @@ def about():
 def rights():
     return render_template("rights.html")
 
-
 @app.route("/laws")
 def laws():
     return render_template("laws.html")
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
-
     if request.method == "POST":
         name = request.form["name"]
         email = request.form["email"]
@@ -118,26 +116,23 @@ def contact():
         message = request.form["message"]
 
         db_conn = get_db()
-if db_conn is None:
-    return "Database not available on live server"
-cursor = db_conn.cursor()
+        if db_conn is None:
+            return "Database not available on live server"
+        cursor = db_conn.cursor()
 
-sql = """
-INSERT INTO contact_messages
-(name, email, subject, message)
-VALUES (%s, %s, %s, %s)
-"""
+        sql = """
+        INSERT INTO contact_messages
+        (name, email, subject, message)
+        VALUES (%s, %s, %s, %s)
+        """
 
-values = (name, email, subject, message)
+        values = (name, email, subject, message)
 
-cursor.execute(sql, values)
-db.commit()
-cursor.close()
-
-    return "Your message has been submitted successfully."
-
-return render_template("contact.html")
-
+        cursor.execute(sql, values)
+        db_conn.commit()
+        cursor.close()
+        return "Your message has been submitted successfully."
+    return render_template("contact.html")
 
 @app.route("/legal-aid", methods=["GET", "POST"])
 def legal_aid():
@@ -149,29 +144,26 @@ def legal_aid():
         description = request.form["description"]
 
         db_conn = get_db()
-if db_conn is None:
-    return "Database not available on live server"
-cursor = db_conn.cursor()
+        if db_conn is None:
+            return "Database not available on live server"
+        cursor = db_conn.cursor()
 
-sql = """
-INSERT INTO legal_aid_requests
-(user_name, email, phone, subject, description)
-VALUES (%s, %s, %s, %s, %s)
-"""
+        sql = """
+        INSERT INTO legal_aid_requests
+        (user_name, email, phone, subject, description)
+        VALUES (%s, %s, %s, %s, %s)
+        """
+        values = (name, email, phone, category, description)
 
-values = (name, email, phone, category, description)
+        cursor.execute(sql, values)
+        db_conn.commit()
+        cursor.close()
 
-cursor.execute(sql, values)
-db.commit()
-cursor.close()
-
-    return "Your legal aid request has been submitted successfully."
-
-return render_template("legal_aid.html")
+        return "Your legal aid request has been submitted successfully."
+    return render_template("legal_aid.html")
 
 @app.route("/admin-login", methods=["GET", "POST"])
 def admin_login():
-
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -186,14 +178,13 @@ def admin_login():
 
 @app.route("/admin-messages")
 def admin_messages():
-
     if not session.get("admin_logged_in"):
         return redirect(url_for("admin_login"))
 
-        db_conn = get_db()
-if db_conn is None:
-    return "Database not available on live server"
-cursor = db_conn.cursor()
+    db_conn = get_db()
+    if db_conn is None:
+        return "Database not available on live server"
+    cursor = db_conn.cursor()
 
     cursor.execute("SELECT * FROM contact_messages")
 
@@ -208,16 +199,15 @@ def admin():
     if not session.get("admin_logged_in"):
         return redirect(url_for("admin_login"))
 
-   db_conn = get_db()
-if db_conn is None:
-    return "Database not available on live server"
-cursor = db_conn.cursor()
+    db_conn = get_db()
+    if db_conn is None:
+        return "Database not available on live server"
+    cursor = db_conn.cursor()
     cursor.execute("SELECT * FROM legal_aid_requests")
     requests = cursor.fetchall()
     cursor.close()
 
     return render_template("admin.html", requests=requests)
-
 
 @app.route("/admin-logout")
 def admin_logout():
@@ -233,17 +223,16 @@ def user_logout():
 
 @app.route("/update-status/<int:request_id>", methods=["GET", "POST"])
 def update_status(request_id):
-
     if not session.get("admin_logged_in"):
         return redirect(url_for("admin_login"))
 
     if request.method == "POST":
         status = request.form["status"]
 
-        db_conn = get_db()
-if db_conn is None:
-    return "Database not available on live server"
-cursor = db_conn.cursor()
+         db_conn = get_db()
+        if db_conn is None:
+            return "Database not available on live server"
+        cursor = db_conn.cursor()
 
         sql = """
         UPDATE legal_aid_requests
@@ -252,7 +241,7 @@ cursor = db_conn.cursor()
         """
 
         cursor.execute(sql, (status, request_id))
-        db.commit()
+        db_conn.commit()
         cursor.close()
 
         return redirect(url_for("admin"))
@@ -261,23 +250,21 @@ cursor = db_conn.cursor()
 
 @app.route("/delete-request/<int:request_id>")
 def delete_request(request_id):
-
     if not session.get("admin_logged_in"):
         return redirect(url_for("admin_login"))
 
     db_conn = get_db()
-if db_conn is None:
-    return "Database not available on live server"
-cursor = db_conn.cursor()
+    if db_conn is None:
+        return "Database not available on live server"
+    cursor = db_conn.cursor()
 
     sql = "DELETE FROM legal_aid_requests WHERE id = %s"
 
     cursor.execute(sql, (request_id,))
-    db.commit()
+    db_conn.commit()
     cursor.close()
 
     return redirect(url_for("admin"))
-
 
 if __name__ == "__main__":
     app.run(debug=True)
