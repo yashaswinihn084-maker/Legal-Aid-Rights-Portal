@@ -54,16 +54,16 @@ if db_conn is None:
     return "Database not available on live server"
 cursor = db_conn.cursor()
 
-    sql = """
-    SELECT * FROM legal_aid_requests
-    WHERE email = %s
-    """
+sql = """
+SELECT * FROM legal_aid_requests
+WHERE email = %s
+"""
 
-    cursor.execute(sql, (user_email,))
-    requests = cursor.fetchall()
-    cursor.close()
+cursor.execute(sql, (user_email,))
+requests = cursor.fetchall()
+cursor.close()
 
-    return render_template("user_dashboard.html", requests=requests)
+return render_template("user_dashboard.html", requests=requests)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -79,20 +79,20 @@ if db_conn is None:
     return "Database not available on live server"
 cursor = db_conn.cursor()
 
-        sql = """
-        INSERT INTO users (name, email, phone, password)
-        VALUES (%s, %s, %s, %s)
-        """
+sql = """
+INSERT INTO users (name, email, phone, password)
+VALUES (%s, %s, %s, %s)
+"""
 
-        values = (name, email, phone, password)
+values = (name, email, phone, password)
 
-        cursor.execute(sql, values)
-        db.commit()
-        cursor.close()
+cursor.execute(sql, values)
+db.commit()
+cursor.close()
 
-        return "Registration successful!"
+return "Registration successful!"
 
-    return render_template("register.html")
+return render_template("register.html")
 
 @app.route("/")
 def home():
