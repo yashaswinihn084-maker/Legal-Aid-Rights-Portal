@@ -17,11 +17,10 @@ def get_db():
         print(f"DB connection failed: {e}")
         return None
 
-db = get_db()
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
+        db = get_db()
         email = request.form["email"]
         password = request.form["password"]
         cursor = db.cursor()
@@ -32,12 +31,13 @@ def login():
         cursor.execute(sql, (email, password))
         user = cursor.fetchone()
         cursor.close()
-        if user:
-            session["user_logged_in"] = True
-            session["user_name"] = user[1]
-            session["user_email"] = user[2]
-            session["user_phone"] = user[3]
-            return redirect(url_for("user_dashboard"))
+    if user:
+        session["user_logged_in"] = True
+        session["user_name"] = user[1]
+        session["user_email"] = user[2]
+        session["user_phone"] = user[3]
+        return redirect(url_for("user_dashboard"))
+    else:
         return "Invalid email or password"
     return render_template("login.html")
 
@@ -58,51 +58,46 @@ sql = """
 SELECT * FROM legal_aid_requests
 WHERE email = %s
 """
+    cursor.execute(sql, (user_email,))
+    requests = cursor.fetchall()
+    cursor.close()
 
-cursor.execute(sql, (user_email,))
-requests = cursor.fetchall()
-cursor.close()
-
-return render_template("user_dashboard.html", requests=requests)
+    return render_template("user_dashboard.html", requests=requests)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-
     if request.method == "POST":
         name = request.form["name"]
         email = request.form["email"]
         phone = request.form["phone"]
         password = request.form["password"]
 
-        db_conn = get_db()
-if db_conn is None:
-    return "Database not available on live server"
-cursor = db_conn.cursor()
+               db_conn = get_db()
+        if db_conn is None:
+            return "Database not available on live server"
+        cursor = db_conn.cursor()
 
-sql = """
-INSERT INTO users (name, email, phone, password)
-VALUES (%s, %s, %s, %s)
-"""
+        sql = """
+        INSERT INTO users (name, email, phone, password)
+        VALUES (%s, %s, %s, %s)
+        """
 
-values = (name, email, phone, password)
+        values = (name, email, phone, password)
 
-cursor.execute(sql, values)
-db.commit()
-cursor.close()
+        cursor.execute(sql, values)
+        db_conn.commit()
+        cursor.close()
 
-return "Registration successful!"
-
-return render_template("register.html")
+        return "Registration successful!"
+    return render_template("register.html")
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
-
 @app.route("/about")
 def about():
     return render_template("about.html")
-
 
 @app.route("/rights")
 def rights():
