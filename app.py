@@ -127,21 +127,21 @@ if db_conn is None:
     return "Database not available on live server"
 cursor = db_conn.cursor()
 
-        sql = """
-        INSERT INTO contact_messages
-        (name, email, subject, message)
-        VALUES (%s, %s, %s, %s)
-        """
+sql = """
+INSERT INTO contact_messages
+(name, email, subject, message)
+VALUES (%s, %s, %s, %s)
+"""
 
-        values = (name, email, subject, message)
+values = (name, email, subject, message)
 
-        cursor.execute(sql, values)
-        db.commit()
-        cursor.close()
+cursor.execute(sql, values)
+db.commit()
+cursor.close()
 
-        return "Your message has been submitted successfully."
+    return "Your message has been submitted successfully."
 
-    return render_template("contact.html")
+return render_template("contact.html")
 
 
 @app.route("/legal-aid", methods=["GET", "POST"])
@@ -158,21 +158,21 @@ if db_conn is None:
     return "Database not available on live server"
 cursor = db_conn.cursor()
 
-        sql = """
-        INSERT INTO legal_aid_requests
-        (user_name, email, phone, subject, description)
-        VALUES (%s, %s, %s, %s, %s)
-        """
+sql = """
+INSERT INTO legal_aid_requests
+(user_name, email, phone, subject, description)
+VALUES (%s, %s, %s, %s, %s)
+"""
 
-        values = (name, email, phone, category, description)
+values = (name, email, phone, category, description)
 
-        cursor.execute(sql, values)
-        db.commit()
-        cursor.close()
+cursor.execute(sql, values)
+db.commit()
+cursor.close()
 
-        return "Your legal aid request has been submitted successfully."
+    return "Your legal aid request has been submitted successfully."
 
-    return render_template("legal_aid.html")
+return render_template("legal_aid.html")
 
 @app.route("/admin-login", methods=["GET", "POST"])
 def admin_login():
