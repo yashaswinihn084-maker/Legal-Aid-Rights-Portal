@@ -41,6 +41,10 @@ def login():
         return "Invalid email or password"
     return render_template("login.html")
 
+@app.route("/")
+def home():
+    return redirect(url_for("login"))
+
 @app.route("/user-dashboard")
 def user_dashboard():
     if not session.get("user_logged_in"):
