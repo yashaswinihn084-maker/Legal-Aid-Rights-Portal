@@ -72,7 +72,7 @@ def register():
         phone = request.form["phone"]
         password = request.form["password"]
 
-               db_conn = get_db()
+        db_conn = get_db()
         if db_conn is None:
             return "Database not available on live server"
         cursor = db_conn.cursor()
@@ -81,19 +81,14 @@ def register():
         INSERT INTO users (name, email, phone, password)
         VALUES (%s, %s, %s, %s)
         """
-
-        values = (name, email, phone, password)
-
-        cursor.execute(sql, values)
+        cursor.execute(sql, (name, email, phone, password))
         db_conn.commit()
         cursor.close()
 
-        return "Registration successful!"
-    return render_template("register.html")
+        return redirect(url_for("login"))
 
-@app.route("/")
-def home():
-    return render_template("index.html")
+    return render_template("register.html")
+ 
 
 @app.route("/about")
 def about():
