@@ -31,10 +31,10 @@ if db_conn is None:
     return "Database not available on live server"
 cursor = db_conn.cursor()
 
-        sql = """
+        sql = ""
         SELECT * FROM users
         WHERE email = %s AND password = %s
-        """
+        ""
 
         cursor.execute(sql, (email, password))
         user = cursor.fetchone()
