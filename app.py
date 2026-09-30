@@ -21,8 +21,7 @@ db = get_db()
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-
-       if request.method == "POST":
+    if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
         cursor = db.cursor()
@@ -30,21 +29,16 @@ def login():
         SELECT * FROM users
         WHERE email = %s AND password = %s
         """
-
         cursor.execute(sql, (email, password))
         user = cursor.fetchone()
         cursor.close()
-
         if user:
             session["user_logged_in"] = True
             session["user_name"] = user[1]
             session["user_email"] = user[2]
             session["user_phone"] = user[3]
             return redirect(url_for("user_dashboard"))
-            return "Login successful!"
-
         return "Invalid email or password"
-
     return render_template("login.html")
 
 @app.route("/user-dashboard")
