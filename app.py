@@ -22,6 +22,7 @@ def get_db():
     except Exception as e:
         print(f"DB connection failed: {e}")
         return None
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     user = None
@@ -47,7 +48,7 @@ def login():
             return "Invalid email or password"
 
     return render_template("login.html")
-    
+
 @app.route("/")
 def home():
     return redirect(url_for("login"))
@@ -64,11 +65,7 @@ def user_dashboard():
         return "Database not available on live server"
     cursor = db_conn.cursor()
 
-    sql = """
-    SELECT * FROM legal_aid_requests
-    WHERE email = %s
-    """
-
+    sql = "SELECT * FROM legal_aid_requests WHERE email = %s"
     cursor.execute(sql, (user_email,))
     requests = cursor.fetchall()
     cursor.close()
@@ -83,8 +80,7 @@ def register():
         phone = request.form["phone"]
         password = request.form["password"]
 
-        # Phone validation - only 10 digits
-        if not phone.isdigit() or len(phone) != 10:
+        if not phone.isdigit() or len(phone)!= 10:
             return "Phone number must be exactly 10 digits"
 
         db_conn = get_db()
@@ -100,8 +96,8 @@ def register():
             return f"Registration error: {e}"
 
         return redirect(url_for("login"))
+
     return render_template("register.html")
- 
 
 @app.route("/about")
 def about():
@@ -128,12 +124,7 @@ def contact():
             return "Database not available on live server"
         cursor = db_conn.cursor()
 
-        sql = """
-        INSERT INTO contact_messages
-        (name, email, subject, message)
-        VALUES (%s, %s, %s, %s)
-        """
-
+        sql = "INSERT INTO contact_messages (name, email, subject, message) VALUES (%s, %s, %s, %s)"
         values = (name, email, subject, message)
 
         cursor.execute(sql, values)
@@ -152,21 +143,25 @@ def legal_aid():
             category = request.form["category"]
             description = request.form["description"]
 
-            if not phone.isdigit() or len(phone) != 10:
+            if not phone.isdigit() or len(phone)!= 10:
                 return "Phone number must be exactly 10 digits"
 
             db_conn = get_db()
             if db_conn is None:
                 return "Database not available on live server"
             cursor = db_conn.cursor()
+
             sql = """
             INSERT INTO legal_aid_requests
             (user_name, email, phone, subject, description, status)
             VALUES (%s, %s, %s, %s, %s, 'Pending')
             """
-            cursor.execute(sql, (name, email, phone, category, description))
+            values = (name, email, phone, category, description)
+
+            cursor.execute(sql, values)
             db_conn.commit()
             cursor.close()
+
             return "Your legal aid request has been submitted successfully."
         except Exception as e:
             return f"Error submitting request: {e}"
@@ -195,13 +190,9 @@ def admin_messages():
     if db_conn is None:
         return "Database not available on live server"
     cursor = db_conn.cursor()
-
     cursor.execute("SELECT * FROM contact_messages")
-
     messages = cursor.fetchall()
-
     cursor.close()
-
     return render_template("admin_messages.html", messages=messages)
 
 @app.route("/admin")
@@ -216,7 +207,6 @@ def admin():
     cursor.execute("SELECT * FROM legal_aid_requests")
     requests = cursor.fetchall()
     cursor.close()
-
     return render_template("admin.html", requests=requests)
 
 @app.route("/admin-logout")
@@ -239,25 +229,18 @@ def update_status(request_id):
 
     if request.method == "POST":
         status = request.form["status"]
-
         db_conn = get_db()
         if db_conn is None:
             return "Database not available on live server"
         cursor = db_conn.cursor()
-
-        sql = """
-        UPDATE legal_aid_requests
-        SET status = %s
-        WHERE id = %s
-        """
+        sql = "UPDATE legal_aid_requests SET status = %s WHERE id = %s"
         cursor.execute(sql, (status, request_id))
         db_conn.commit()
         cursor.close()
-
         return redirect(url_for("admin"))
 
     return render_template("update_status.html")
-    
+
 @app.route("/delete-request/<int:request_id>")
 def delete_request(request_id):
     if not session.get("admin_logged_in"):
@@ -267,13 +250,10 @@ def delete_request(request_id):
     if db_conn is None:
         return "Database not available on live server"
     cursor = db_conn.cursor()
-
     sql = "DELETE FROM legal_aid_requests WHERE id = %s"
-
     cursor.execute(sql, (request_id,))
     db_conn.commit()
     cursor.close()
-
     return redirect(url_for("admin"))
 
 if __name__ == "__main__":
