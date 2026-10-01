@@ -65,7 +65,7 @@ def user_dashboard():
         return "Database not available on live server"
     cursor = db_conn.cursor()
 
-    sql = "SELECT * FROM legal_aid_requests WHERE email = %s"
+    sql = "SELECT * FROM legal_aid_requests WHERE user_email = %s ORDER BY created_at DESC"
     cursor.execute(sql, (user_email,))
     requests = cursor.fetchall()
     cursor.close()
