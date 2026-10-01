@@ -151,12 +151,8 @@ def legal_aid():
                 return "Database not available on live server"
             cursor = db_conn.cursor()
 
-            sql = """
-            INSERT INTO legal_aid_requests
-            (user_name, email, phone, subject, description, status)
-            VALUES (%s, %s, %s, %s, %s, 'Pending')
-            """
-            values = (name, email, phone, category, description)
+            sql = "INSERT INTO legal_aid_requests (user_email, name, phone, issue_type, description, status) VALUES (%s, %s, %s, %s, %s, 'Pending')"
+            values = (email, name, phone, category, description)
 
             cursor.execute(sql, values)
             db_conn.commit()
