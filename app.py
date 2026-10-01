@@ -169,11 +169,17 @@ def admin_login():
         username = request.form['username']
         password = request.form['password']
         if username == 'admin' and password == 'admin123':
-            session['admin'] = True
+            session['admin_logged_in'] = True
             return redirect('/admin-dashboard')
         else:
             return "Invalid admin credentials"
     return render_template('admin_login.html')
+
+@app.route('/admin-dashboard')
+def admin_dashboard():
+    if not session.get('admin_logged_in'):
+        return redirect('/admin-login')
+    return render_template('admin.html')
 
 @app.route("/admin-messages")
 
