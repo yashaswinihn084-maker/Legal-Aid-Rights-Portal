@@ -163,21 +163,20 @@ def legal_aid():
             return f"Error submitting request: {e}"
     return render_template("legal_aid.html")
 
-@app.route("/admin-login", methods=["GET", "POST"])
+@app.route('/admin-login', methods=['GET', 'POST'])
 def admin_login():
-    if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
-
-        if username == "admin" and password == "admin123":
-            session["admin_logged_in"] = True
-            return redirect(url_for("admin"))
-
-        return "Invalid username or password"
-
-    return render_template("admin_login.html")
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if username == 'admin' and password == 'admin123':
+            session['admin'] = True
+            return redirect('/admin-dashboard')
+        else:
+            return "Invalid admin credentials"
+    return render_template('admin_login.html')
 
 @app.route("/admin-messages")
+
 def admin_messages():
     if not session.get("admin_logged_in"):
         return redirect(url_for("admin_login"))
