@@ -83,21 +83,23 @@ def register():
         phone = request.form["phone"]
         password = request.form["password"]
 
+        # Phone validation - only 10 digits
+        if not phone.isdigit() or len(phone) != 10:
+            return "Phone number must be exactly 10 digits"
+
         db_conn = get_db()
         if db_conn is None:
             return "Database not available on live server"
-        cursor = db_conn.cursor()
-
-        sql = """
-        INSERT INTO users (name, email, phone, password)
-        VALUES (%s, %s, %s, %s)
-        """
-        cursor.execute(sql, (name, email, phone, password))
-        db_conn.commit()
-        cursor.close()
+        try:
+            cursor = db_conn.cursor()
+            sql = "INSERT INTO users (name, email, phone, password) VALUES (%s, %s, %s, %s)"
+            cursor.execute(sql, (name, email, phone, password))
+            db_conn.commit()
+            cursor.close()
+        except Exception as e:
+            return f"Registration error: {e}"
 
         return redirect(url_for("login"))
-
     return render_template("register.html")
  
 
@@ -143,29 +145,31 @@ def contact():
 @app.route("/legal-aid", methods=["GET", "POST"])
 def legal_aid():
     if request.method == "POST":
-        name = request.form["name"]
-        email = request.form["email"]
-        phone = request.form["phone"]
-        category = request.form["category"]
-        description = request.form["description"]
+        try:
+            name = request.form["name"]
+            email = request.form["email"]
+            phone = request.form["phone"]
+            category = request.form["category"]
+            description = request.form["description"]
 
-        db_conn = get_db()
-        if db_conn is None:
-            return "Database not available on live server"
-        cursor = db_conn.cursor()
+            if not phone.isdigit() or len(phone) != 10:
+                return "Phone number must be exactly 10 digits"
 
-        sql = """
-        INSERT INTO legal_aid_requests
-        (user_name, email, phone, subject, description)
-        VALUES (%s, %s, %s, %s, %s)
-        """
-        values = (name, email, phone, category, description)
-
-        cursor.execute(sql, values)
-        db_conn.commit()
-        cursor.close()
-
-        return "Your legal aid request has been submitted successfully."
+            db_conn = get_db()
+            if db_conn is None:
+                return "Database not available on live server"
+            cursor = db_conn.cursor()
+            sql = """
+            INSERT INTO legal_aid_requests
+            (user_name, email, phone, subject, description, status)
+            VALUES (%s, %s, %s, %s, %s, 'Pending')
+            """
+            cursor.execute(sql, (name, email, phone, category, description))
+            db_conn.commit()
+            cursor.close()
+            return "Your legal aid request has been submitted successfully."
+        except Exception as e:
+            return f"Error submitting request: {e}"
     return render_template("legal_aid.html")
 
 @app.route("/admin-login", methods=["GET", "POST"])
@@ -225,6 +229,7 @@ def user_logout():
     session.pop("user_logged_in", None)
     session.pop("user_name", None)
     session.pop("user_email", None)
+    session.pop("user_phone", None)
     return redirect(url_for("login"))
 
 @app.route("/update-status/<int:request_id>", methods=["GET", "POST"])
