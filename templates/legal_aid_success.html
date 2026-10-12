@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solution Provided - Legal Aid</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{font-family:'Inter',sans-serif;box-sizing:border-box} body{background:#ffffff;margin:0;color:#1a202c}
+.nav{background:#fff;border-bottom:1px solid #e2e8f0;padding:16px 24px;display:flex;justify-content:space-between}
+.container{max-width:800px;margin:30px auto;padding:0 20px}
+.success-top{background:#f0fff4;border:1px solid #c6f6d5;border-radius:16px;padding:24px;text-align:center;margin-bottom:24px}
+.success-top h2{color:#22543d;font-size:24px}
+.badge{display:inline-block;background:#22543d;color:#fff;padding:6px 14px;border-radius:20px;font-size:12px;margin-top:8px}
+.grid{display:grid;grid-template-columns:1fr;gap:16px}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:24px}
+.card h3{color:#1a365d;margin-bottom:12px}
+.solution-box{background:#fffff0;border:1px solid #ecc94b;border-radius:12px;padding:20px;line-height:1.6}
+.law{color:#744210;font-weight:600}
+.helpline{background:#ebf8ff;border:1px solid #90cdf4;border-radius:10px;padding:16px;margin-top:16px}
+.btn{display:inline-block;margin-top:20px;background:#1a365d;color:#fff;padding:12px 24px;border-radius:10px;text-decoration:none;font-weight:700}
+</style>
+</head>
+<body>
+<div class="nav"><b>⚖️ Karnataka Legal Aid</b><div><a href="/user-dashboard" style="text-decoration:none;color:#2b6cb0;font-weight:600">Dashboard</a></div></div>
+<div class="container">
+<div class="success-top">
+<h2>✅ Request Submitted Successfully</h2>
+<p>Reference ID: <b>{{ ref_id }}</b></p>
+<span class="badge">Eligible for FREE Legal Aid - LSA Act 1987</span>
+</div>
+
+<div class="grid">
+<div class="card">
+<h3>📋 Your Issue</h3>
+<p><b>Name:</b> {{ name }}</p>
+<p><b>Category:</b> {{ category }}</p>
+<p><b>Description:</b> {{ description }}</p>
+</div>
+
+<div class="card">
+<h3>⚖️ Instant Legal Solution Provided</h3>
+<div class="solution-box">
+<p style="font-size:18px;font-weight:700;color:#1a365d">{{ solution.title }}</p>
+<p style="margin-top:12px">{{ solution.solution }}</p>
+<p style="margin-top:12px"><span class="law">Relevant Law: {{ solution.law }}</span></p>
+</div>
+<div class="helpline">
+<b>📞 Emergency Helpline:</b> {{ solution.helpline }}<br>
+<b>🏛️ KSLSA:</b> 080-22111718 | NALSA Toll-Free: 15100<br>
+<b>⏰ Next Step:</b> DLSA advocate will call you within 24 hours. Keep Aadhaar, Income Certificate & Evidence ready.
+</div>
+<a href="/user-dashboard" class="btn">Go to Dashboard - Track Status</a>
+</div>
+</div>
+</div>
+</body>
+</html>
