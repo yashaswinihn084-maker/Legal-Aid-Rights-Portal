@@ -1,39 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>User Registration</title>
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f7fb;
-        text-align: center;
-        padding-top: 40px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register - Karnataka Legal Aid Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#ffffff;min-height:100vh;display:flex;flex-direction:column}
+.navbar{background:#fff;border-bottom:1px solid #e2e8f0;padding:16px 32px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:800;font-size:20px;color:#1a365d}
+.links a{margin-left:20px;text-decoration:none;color:#4a5568;font-weight:600;font-size:14px}
+.hero{display:flex;flex:1;max-width:1200px;margin:0 auto;width:100%}
+.left{flex:1;padding:60px 48px}
+.left h1{font-size:42px;font-weight:800;color:#1a365d;line-height:1.1}
+.left h1 span{color:#2b6cb0}
+.left p{color:#718096;font-size:17px;margin-top:16px;line-height:1.6}
+.steps{margin-top:28px}
+.step{display:flex;gap:12px;margin-bottom:16px}
+.num{background:#1a365d;color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0}
+.right{flex:0.8;display:flex;align-items:center;justify-content:center;padding:40px;background:#f7fafc}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:32px;width:100%;max-width:440px;box-shadow:0 10px 40px rgba(0,0,0,0.05)}
+.card h2{font-size:24px;font-weight:700;color:#1a365d}
+.card p.sub{color:#718096;font-size:13px;margin:6px 0 20px}
+label{font-weight:600;font-size:13px;color:#2d3748;margin:12px 0 6px;display:block}
+input{width:100%;padding:12px 14px;border:1px solid #cbd5e0;border-radius:10px;font-size:15px;outline:none}
+input:focus{border-color:#2b6cb0;box-shadow:0 0 0 3px rgba(43,108,176,0.1)}
+.btn{width:100%;margin-top:20px;background:#1a365d;color:#fff;border:none;padding:14px;border-radius:10px;font-weight:700;cursor:pointer}
+.btn:hover{background:#2a4a7f}
+.bottom{text-align:center;margin-top:16px;font-size:13px;color:#718096}
+.bottom a{color:#2b6cb0;font-weight:600;text-decoration:none}
+@media(max-width:900px){.hero{flex-direction:column}.left{padding:28px 20px}.left h1{font-size:30px}}
 </style>
 </head>
 <body>
-
-    <h1>Legal Aid & Rights Awareness Portal</h1>
-    <h2>User Registration</h2>
-    <div style="background:white; width:400px; margin:30px auto; padding:30px; border-radius:10px; box-shadow:0 3px 10px rgba(0,0,0,0.1);"></div>
-    <form method="POST">
-
-        <label>Full Name:</label><br>
-        <input type="text" name="name" required><br><br>
-
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
-
-        <label>Phone:</label><br>
-        <input type="text" name="phone" required><br><br>
-
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
-
-        <button type="submit">Register</button>
-
-    </form>
-    </div>  
-
+<div class="navbar">
+<div class="logo">⚖️ Karnataka Legal Aid Portal</div>
+<div class="links"><a href="/login">Login</a><a href="/about">About</a><a href="/contact">Contact</a></div>
+</div>
+<div class="hero">
+<div class="left">
+<h1>Join 15,000+ Citizens Getting <span>Free Legal Help</span></h1>
+<p>Register once, get lifetime access to free DLSA advocates under LSA Act 1987. Income &lt; ₹3L = 100% free.</p>
+<div class="steps">
+<div class="step"><div class="num">1</div><div><b style="font-size:14px">Create Account in 30 sec</b><p style="font-size:12px;color:#718096">Only name, email, phone needed</p></div></div>
+<div class="step"><div class="num">2</div><div><b style="font-size:14px">Submit Your Issue</b><p style="font-size:12px;color:#718096">Get instant solution + law section</p></div></div>
+<div class="step"><div class="num">3</div><div><b style="font-size:14px">Advocate Calls in 24hr</b><p style="font-size:12px;color:#718096">Free lawyer from KSLSA files your case</p></div></div>
+</div>
+</div>
+<div class="right">
+<div class="card">
+<h2>Create Free Account</h2>
+<p class="sub">No fees. Eligible for NALSA free aid - 15100</p>
+<form method="POST" action="/register">
+<label>Full Name</label>
+<input type="text" name="name" required placeholder="Yashaswini H N">
+<label>Email</label>
+<input type="email" name="email" required placeholder="you@example.com">
+<label>Phone (10 digits)</label>
+<input type="tel" name="phone" required pattern="[0-9]{10}" placeholder="9876543210">
+<label>Password</label>
+<input type="password" name="password" required placeholder="Create strong password">
+<button type="submit" class="btn">Create Account - Free</button>
+</form>
+<p class="bottom">Already have account? <a href="/login">Login here</a></p>
+</div>
+</div>
+</div>
 </body>
 </html>
