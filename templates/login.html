@@ -1,39 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>User Login</title>
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f7fb;
-        text-align: center;
-        padding-top: 60px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Karnataka Legal Aid Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#ffffff;min-height:100vh;display:flex;flex-direction:column}
+.navbar{background:#fff;border-bottom:1px solid #e2e8f0;padding:16px 32px;display:flex;justify-content:space-between;align-items:center}
+.navbar .logo{font-weight:800;font-size:20px;color:#1a365d}
+.navbar .links a{margin-left:20px;text-decoration:none;color:#4a5568;font-weight:600;font-size:14px}
+.navbar .links a:hover{color:#1a365d}
+.hero{display:flex;flex:1;max-width:1200px;margin:0 auto;width:100%}
+.left{flex:1;padding:80px 48px;background:#ffffff}
+.left h1{font-size:48px;font-weight:800;color:#1a365d;line-height:1.1;margin-bottom:16px}
+.left h1 span{color:#2b6cb0}
+.left p.desc{color:#718096;font-size:18px;line-height:1.6;margin-bottom:32px}
+.features{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+.feat{background:#f7fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px}
+.feat b{color:#1a365d;font-size:14px}
+.feat p{font-size:12px;color:#718096;margin-top:4px}
+.right{flex:0.8;display:flex;align-items:center;justify-content:center;padding:40px;background:#f7fafc}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:36px;width:100%;max-width:420px;box-shadow:0 10px 40px rgba(0,0,0,0.05)}
+.card h2{font-size:24px;font-weight:700;color:#1a365d;margin-bottom:6px}
+.card p.sub{color:#718096;font-size:14px;margin-bottom:24px}
+label{font-weight:600;font-size:13px;color:#2d3748;margin:14px 0 6px;display:block}
+input{width:100%;padding:13px 14px;border:1px solid #cbd5e0;border-radius:10px;font-size:15px;outline:none}
+input:focus{border-color:#2b6cb0;box-shadow:0 0 0 3px rgba(43,108,176,0.1)}
+.btn{width:100%;margin-top:22px;background:#1a365d;color:#fff;border:none;padding:14px;border-radius:10px;font-weight:700;font-size:15px;cursor:pointer}
+.btn:hover{background:#2a4a7f}
+.bottom-text{text-align:center;margin-top:18px;font-size:13px;color:#718096}
+.bottom-text a{color:#2b6cb0;font-weight:600;text-decoration:none}
+.trust{display:flex;gap:8px;justify-content:center;margin-top:20px}
+.trust span{background:#edf2f7;border-radius:20px;padding:6px 12px;font-size:11px;color:#4a5568;font-weight:600}
+@media(max-width:900px){.hero{flex-direction:column}.left{padding:32px 20px}.left h1{font-size:32px}.right{background:#fff;padding:20px}}
 </style>
 </head>
 <body>
-
-    <h1>Legal Aid & Rights Awareness Portal</h1>
-    <h2>User Login</h2>
-<div style="background:white; width:350px; margin:30px auto; padding:30px; border-radius:10px; box-shadow:0 3px 10px rgba(0,0,0,0.1);"></div>
-    <form method="POST">
-
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
-
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
-
-        <button type="submit">Login</button>
-
-    </form>
+<div class="navbar">
+<div class="logo">⚖️ Karnataka Legal Aid Portal</div>
+<div class="links">
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/rights">Rights</a>
+<a href="/laws">Laws</a>
+<a href="/contact">Contact</a>
 </div>
-    </body>
+</div>
 
-    <br>
+<div class="hero">
+<div class="left">
+<h1>Free Legal Aid for Every <span>Citizen of Karnataka</span></h1>
+<p class="desc">Under Legal Services Authority Act, 1987 - Sec 12. Get instant legal solution + free DLSA advocate if income &lt; ₹3 Lakhs. No fees.</p>
 
-    <p>Don't have an account?</p>
-    <a href="/register">Register here</a>
+<div class="features">
+<div class="feat"><b>✅ Instant Solution</b><p>Get law, section & helpline immediately after submit</p></div>
+<div class="feat"><b>📞 24hr Advocate Call</b><p>DLSA lawyer will call & file case free</p></div>
+<div class="feat"><b>🏛️ Govt Verified</b><p>Connected to KSLSA & NALSA 15100</p></div>
+<div class="feat"><b>🔒 100% Confidential</b><p>Your data protected under IT Act 2000</p></div>
+</div>
+</div>
 
+<div class="right">
+<div class="card">
+<h2>Welcome Back</h2>
+<p class="sub">Login to request free legal aid & track your case</p>
+
+<form method="POST" action="/login">
+<label>Email Address</label>
+<input type="email" name="email" required placeholder="you@example.com">
+
+<label>Password</label>
+<input type="password" name="password" required placeholder="••••••••">
+
+<button type="submit" class="btn">Login Securely</button>
+</form>
+
+<p class="bottom-text">Don't have account? <a href="/register">Register Free</a></p>
+<p class="bottom-text" style="margin-top:8px"><a href="/admin-login">Admin Login</a></p>
+
+<div class="trust">
+<span>KSLSA Approved</span><span>NALSA 15100</span><span>Free Aid</span>
+</div>
+</div>
+</div>
+</div>
 </body>
 </html>
