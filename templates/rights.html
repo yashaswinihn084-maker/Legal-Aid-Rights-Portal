@@ -1,185 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Legal Rights - Legal Aid Portal</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #f4f7fb;
-            color: #333;
-        }
-
-        header {
-            background-color: #17365d;
-            color: white;
-            padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header h1 {
-            margin: 0;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-
-        .container h2 {
-            text-align: center;
-            color: #17365d;
-            margin-bottom: 30px;
-        }
-
-        .rights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .right-card {
-            background-color: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .right-card h3 {
-            color: #17365d;
-            margin-bottom: 15px;
-        }
-
-        .right-card p {
-            line-height: 1.6;
-        }
-
-        footer {
-            background-color: #17365d;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
-        }
-    </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Rights - Legal Aid Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{font-family:'Inter',sans-serif;box-sizing:border-box;margin:0;padding:0} body{background:#fff;color:#1a202c;line-height:1.6}
+.navbar{background:#fff;border-bottom:1px solid #e2e8f0;padding:14px 28px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;box-shadow:0 1px 8px rgba(0,0,0,0.04)}
+.nav-logo{font-weight:800;color:#1a202c;font-size:18px}
+.nav-links{display:flex;gap:22px;align-items:center}
+.nav-links a{text-decoration:none;color:#4a5568;font-weight:600;font-size:14px}
+.nav-links a.active{color:#1a202c;border-bottom:2px solid #2b6cb0;padding-bottom:4px}
+.btn-login{border:1px solid #cbd5e0;padding:8px 16px;border-radius:8px}
+.btn-register{background:#2b6cb0;color:#fff!important;padding:8px 18px;border-radius:8px}
+.wrap{max-width:1100px;margin:36px auto;padding:0 20px}
+h1{font-size:36px;font-weight:800;color:#1a365d;text-align:center}
+.sub{text-align:center;color:#718096;margin:10px 0 32px;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:24px;box-shadow:0 2px 10px rgba(0,0,0,0.03)}
+.card h3{color:#1a365d;margin-bottom:10px;font-size:16px}
+.card p{font-size:13px;color:#4a5568}
+.tag{display:inline-block;background:#ebf8ff;border:1px solid #90cdf4;color:#2a4365;padding:4px 10px;border-radius:20px;font-size:10px;font-weight:700;margin-top:10px}
+.highlight{background:#fffff0;border:1px solid #ecc94b;border-radius:12px;padding:20px;text-align:center;margin-top:24px}
+</style>
 </head>
-
 <body>
+<div class="navbar">
+<div class="nav-logo">⚖️ Karnataka Legal Aid Portal</div>
+<div class="nav-links">
+<a href="/">Home</a><a href="/about">About</a><a href="/rights" class="active">Rights</a><a href="/laws">Laws</a><a href="/contact">Contact</a><a href="/legal-aid">Legal Aid</a>
+<a href="/login" class="btn-login">Login</a><a href="/register" class="btn-register">Register</a>
+</div>
+</div>
 
-    <header>
-        <h1>Legal Aid Portal</h1>
+<div class="wrap">
+<h1>Know Your Legal Rights - Free Aid Eligible</h1>
+<p class="sub">Under Constitution Article 39A & LSA Act 1987 - Every citizen can get free lawyer</p>
 
-        <nav>
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/rights">Rights</a>
-            <a href="/laws">Laws</a>
-            <a href="/contact">Contact</a>
-        </nav>
-    </header>
+<div class="grid">
+<div class="card"><h3>⚖️ Right to Free Legal Aid</h3><p>Under LSA Act Sec 12, if your income < ₹3 Lakhs/year, SC/ST, Woman, Child, Victim of trafficking, Disaster victim - You get FREE advocate, court fees, documentation.</p><span class="tag">LSA Act 1987 Sec 12</span></div>
+<div class="card"><h3>👩 Right to Protection - Women</h3><p>Domestic Violence Act 2005 gives Right to Residence, Protection Order, Monetary Relief. Call 181, 1091. Free lady advocate from DLSA within 24hrs.</p><span class="tag">DV Act 2005</span></div>
+<div class="card"><h3>🛡️ Consumer Rights</h3><p>Consumer Protection Act 2019: Right to Refund, Replacement, Compensation up to ₹10L. File at 1915 / consumerhelpline.gov.in. DCDRC must solve in 45 days.</p><span class="tag">CPA 2019 Sec 34</span></div>
+<div class="card"><h3>💻 Cyber Safety Rights</h3><p>IT Act 2000 Sec 66: Right to report hacking, fraud within 2 hours (Golden Hour) at 1930 & cybercrime.gov.in. Bank must freeze amount.</p><span class="tag">IT Act Sec 66</span></div>
+<div class="card"><h3>🏠 Property Rights</h3><p>Karnataka Land Revenue Act: Right to RTC, EC, Mutation. Check Kaveri portal. 12 years possession = ownership right. Free DLSA lawyer for land dispute.</p><span class="tag">KLR Act 1964 Sec 128</span></div>
+<div class="card"><h3>👷 Labour Rights</h3><p>Minimum Wages Act 1948, Payment of Wages Act 1936: Right to Salary on 7th, PF, ESI, Overtime. Salary < ₹25k = free labour lawyer. Call 1800-425-2667.</p><span class="tag">MW Act 1948</span></div>
+</div>
 
-    <div class="container">
-
-        <h2>Know Your Legal Rights</h2>
-        <input
-    type="text"
-    id="rightSearch"
-    placeholder="Search for a legal right..."
-    onkeyup="searchRights()"
-    style="width:100%; padding:12px; margin-bottom:25px; border:1px solid #ccc; border-radius:5px; font-size:16px;"
->
-
-        <div class="rights-grid">
-
-            <div class="right-card">
-                <h3>Right to Equality</h3>
-                <p>
-                    Every person is entitled to equality before the law
-                    and equal protection of the laws.
-                </p>
-            </div>
-
-            <div class="right-card">
-                <h3>Right to Freedom</h3>
-                <p>
-                    Citizens have constitutional freedoms subject to
-                    reasonable restrictions provided by law.
-                </p>
-            </div>
-
-            <div class="right-card">
-                <h3>Right Against Exploitation</h3>
-                <p>
-                    The Constitution provides protections against
-                    trafficking and certain forms of forced labour.
-                </p>
-            </div>
-
-            <div class="right-card">
-                <h3>Right to Constitutional Remedies</h3>
-                <p>
-                    Constitutional remedies allow individuals to approach
-                    appropriate courts for enforcement of fundamental rights.
-                </p>
-            </div>
-
-            <div class="right-card">
-                <h3>Right to Legal Aid</h3>
-                <p>
-                    Eligible persons can receive legal services through
-                    legal services authorities according to applicable law
-                    and eligibility rules.
-                </p>
-            </div>
-
-            <div class="right-card">
-                <h3>Consumer Rights</h3>
-                <p>
-                    Consumers have legal protections relating to goods
-                    and services under applicable consumer protection laws.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-
-    <footer>
-        <p>© 2026 Legal Aid & Rights Awareness Portal</p>
-    </footer>
-<script>
-function searchRights() {
-    let input = document.getElementById("rightSearch").value.toLowerCase();
-    let cards = document.getElementsByClassName("right-card");
-
-    for (let i = 0; i < cards.length; i++) {
-        let text = cards[i].innerText.toLowerCase();
-
-        if (text.includes(input)) {
-            cards[i].style.display = "block";
-        } else {
-            cards[i].style.display = "none";
-        }
-    }
-}
-</script>
-
+<div class="highlight">
+<b style="color:#744210">✅ Are You Eligible for FREE Lawyer? Income < ₹3 Lakhs/year = 100% Free - NALSA 15100</b><br>
+<p style="font-size:13px;color:#4a5568;margin-top:8px">Women, SC/ST, Children, Senior Citizens, Disaster victims, Industrial workers are automatically eligible - No income proof needed.</p>
+<a href="/legal-aid" style="display:inline-block;margin-top:12px;background:#1a365d;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px">Check Eligibility & Request Aid</a>
+</div>
+</div>
 </body>
 </html>
