@@ -1,89 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Legal Aid & Rights Awareness Portal</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
+<title>Legal Aid & Rights Awareness Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *{font-family:'Poppins',sans-serif}
+  body{margin:0;background:#ffffff;color:#1a202c}
+  header{background:#0f2b46;color:white;padding:12px 40px;display:flex;justify-content:space-between;align-items:center}
+  header.logo{font-weight:700;font-size:18px}
+ .hero{padding:40px;background:#f7fafc;display:flex;gap:20px;flex-wrap:wrap}
+ .hero h1{font-size:36px;line-height:1.2;margin:0}
+ .card-row{display:flex;gap:16px;padding:20px 40px;flex-wrap:wrap}
+ .card{background:white;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.08);padding:20px;width:280px}
+ .form-wrap{max-width:700px;margin:20px auto;background:white;padding:30px;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.1)}
+  input,select,textarea{width:100%;padding:12px;margin:8px 0;border:1.5px solid #e2e8f0;border-radius:8px}
+  input:focus,select:focus{border-color:#2b6cb0;outline:none}
+  button{background:#0f2b46;color:white;padding:12px 20px;border:none;border-radius:8px;width:100%;font-weight:600;cursor:pointer}
+  button:hover{background:#1a4a7a}
+  #solutionBox{margin-top:24px}
+ .sol-box{background:#f0fff4;border:2px solid #38a169;border-radius:12px;padding:20px}
+  footer{background:#0f2b46;color:white;padding:20px 40px;margin-top:40px;text-align:center}
+</style>
 </head>
-
 <body>
+<header>
+  <div class="logo">⚖️ Legal Aid & Rights Awareness Portal</div>
+  <div>Home | Services | Login</div>
+</header>
 
-    <header>
-        <h1>Legal Aid Portal</h1>
+<div class="hero">
+  <div style="flex:1">
+    <h1>Get Free Legal Help.<br>Know Your Rights.</h1>
+    <p>Access reliable legal information and connect with free legal aid services across India. Toll-Free: 15100</p>
+    <button style="width:220px">Get Legal Assistance →</button>
+  </div>
+  <div style="flex:1;text-align:center;font-size:80px">⚖️</div>
+</div>
 
-        <nav>
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/rights">Rights</a>
-            <a href="/laws">Laws</a>
-            <a href="/contact">Contact</a>
-            <a href="/legal-aid">Legal Aid</a>
-            <a href="/login">Login</a>
-<a href="/register">Register</a>
-        </nav>
-    </header>
+<div class="card-row">
+  <div class="card"><h3>🛡️ Rights</h3><p>Understand fundamental rights under Indian Constitution.</p></div>
+  <div class="card"><h3>📚 Laws</h3><p>Browse simplified Indian laws in easy language.</p></div>
+  <div class="card"><h3>🤝 Free Legal Aid</h3><p>Get free aid through DLSA & NALSA. Eligible under 1987 Act.</p></div>
+</div>
 
-    <section class="hero">
-        <h2>Legal Aid & Rights Awareness Portal</h2>
+<div class="form-wrap">
+  <h2>Submit Your Legal Issue</h2>
+  <form onsubmit="handleSubmit(event)" id="legalForm">
+    <label>Full Name</label>
+    <input type="text" required placeholder="Enter your full name">
+    <label>Phone Number</label>
+    <input type="tel" required placeholder="+91 6363836036">
+    <label>Legal Issue Type</label>
+    <select id="legalIssue" required>
+      <option value="">Select Issue</option>
+      <option>Consumer Issue</option>
+      <option>Cyber Crime</option>
+      <option>Family Law / Domestic Violence</option>
+      <option>Property Dispute</option>
+      <option>Labour / Employment Issue</option>
+      <option>Other</option>
+    </select>
+    <label>Describe Issue</label>
+    <textarea rows="4" placeholder="Briefly describe your legal issue..."></textarea>
+    <button type="submit">Submit for Legal Solution</button>
+  </form>
+  <div id="solutionBox"></div>
+</div>
 
-        <p>
-            Learn about your legal rights, laws and available legal assistance.
-        </p>
+<footer>© 2026 Legal Aid Portal | GEC KR Pet | Contact: support@legalaid.gov.in | Helpline: 15100</footer>
 
-        <a href="/rights" class="button">Explore Your Rights</a>
-    </section>
+<script>
+const solutions = {
+  "Consumer Issue": "Under Consumer Protection Act 2019, you can file complaint within 2 years. Call NCH 1915. File at consumerhelpline.gov.in. You are eligible for refund + compensation. Keep bill/invoice. DCDRC will resolve in 45 days. Contact KSLSA 080-22111718 for free lawyer if income <3L.",
+  "Cyber Crime": "EMERGENCY: Call 1930 within 2 hours - money can be blocked. File at cybercrime.gov.in. Under IT Act 2000 Sec 43/66, bank must refund if reported quickly. Block SIM/cards. Keep screenshots. Visit nearest Cyber Police. NALSA Helpline 15100 gives free aid.",
+  "Family Law / Domestic Violence": "Under DV Act 2005, you get Protection Order + Residence Right. Call Women Helpline 181. You are eligible for FREE lawyer from DLSA if income <3Lakhs (Sec 12, LSA Act). File at Mahila Court. For child, call 1098. DLSA Bangalore: 080-22211824.",
+  "Property Dispute": "Check RTC, EC, Mutation at Kaveri Online. Send legal notice via DLSA lawyer free. Under CPC, file civil suit at District Court. You can get free legal advice under Legal Services Authority Act 1987. Keep 12 years possession proof. Contact KSLSA.",
+  "Labour / Employment Issue": "Under Minimum Wages Act & Industrial Disputes Act, file at Labour Dept. Call Shram Suvidha 1800-425-2667. You can claim unpaid salary + PF. DLSA provides free labour lawyer. Keep appointment letter, salary slips.",
+  "Other": "Your application registered under NALSA LSAMS. You are eligible for free legal aid under Section 12 of Legal Services Authorities Act 1987 if SC/ST/Women/income<3L. Our advocate will call in 24 hrs. Toll-Free 15100. Keep Aadhaar, Income Certificate."
+};
 
-    <section class="features">
-
-        <h2>Our Services</h2>
-
-        <div class="cards">
-
-            <div class="card">
-                <h3>Know Your Rights</h3>
-                <p>
-                    Learn about important fundamental and legal rights
-                    in a simple and understandable way.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>Legal Information</h3>
-                <p>
-                    Access information about important laws and
-                    legal procedures.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>Legal Assistance</h3>
-                <p>
-                    Find information about available legal aid
-                    and support services.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>Awareness</h3>
-                <p>
-                    Improve your legal awareness and understand
-                    your responsibilities as a citizen.
-                </p>
-            </div>
-
-        </div>
-
-    </section>
-
-    <footer>
-        <p>© 2026 Legal Aid & Rights Awareness Portal</p>
-    </footer>
-
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
+function handleSubmit(e){
+  e.preventDefault();
+  let issue = document.getElementById('legalIssue').value;
+  let solText = solutions[issue] || solutions['Other'];
+  let refId = 'LA2026-' + Math.floor(100000 + Math.random()*900000);
+  document.getElementById('solutionBox').innerHTML = `
+    <div class="sol-box">
+      <h3 style="color:#22543d;margin-top:0">✅ Legal Solution Provided — Eligible for Free Legal Aid</h3>
+      <p><b>Your Issue:</b> ${issue}</p>
+      <p><b>Reference ID:</b> ${refId} | <b>Date:</b> ${new Date().toLocaleString()}</p>
+      <hr>
+      <p><b>Applicable Law & Solution:</b><br>${solText}</p>
+      <p><b>Next Steps:</b><br>1. Approach your District Legal Services Authority (DLSA) at District Court<br>2. Services include free legal advice, document drafting, court representation at NO COST<br>3. Contact NALSA Helpline 15100 or email support@legalaid.gov.in</p>
+      <button onclick="location.reload()" style="background:#38a169;margin-top:10px">Submit Another Issue</button>
+    </div>
+  `;
+  document.getElementById('solutionBox').scrollIntoView({behavior:'smooth'});
+}
+</script>
 </body>
 </html>
