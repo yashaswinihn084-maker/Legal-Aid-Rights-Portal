@@ -1,68 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard - Legal Aid Portal</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; background-color: #f4f6f8; }
-        header { background-color: #1f4e79; color: white; padding: 20px; text-align: center; }
-       .container { width: 90%; max-width: 1100px; margin: 30px auto; }
-       .welcome { background-color: white; padding: 25px; border-radius: 10px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-       .welcome h2 { color: #1f4e79; margin-top:0; }
-       .button { display: inline-block; background-color: #1f4e79; color: white; padding: 10px 18px; text-decoration: none; border-radius: 5px; margin-right: 10px; margin-top:10px; }
-       .button:hover { background-color: #163a5c; }
-       .card { background-color: white; padding: 25px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow-x:auto; }
-        h3 { color: #1f4e79; }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; min-width: 700px; }
-        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; vertical-align: top; }
-        th { background-color: #1f4e79; color: white; }
-       .badge { padding: 5px 12px; border-radius: 20px; font-size: 13px; font-weight: bold; color: white; display:inline-block; }
-       .pending { background-color: #f0ad4e; }
-       .approved { background-color: #5cb85c; }
-       .rejected { background-color: #d9534f; }
-        footer { margin-top: 50px; background-color: #1f4e79; color: white; text-align: center; padding: 15px; }
-    </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Legal Aid Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{font-family:'Inter',sans-serif;box-sizing:border-box;margin:0;padding:0} body{background:#ffffff;color:#1a202c}
+.nav{background:#fff;border-bottom:1px solid #e2e8f0;padding:16px 32px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}
+.nav b{color:#1a365d;font-size:18px}.nav a{text-decoration:none;color:#2b6cb0;font-weight:600;margin-left:16px;font-size:14px}
+.wrap{max-width:1100px;margin:30px auto;padding:0 20px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.top h2{font-size:28px;color:#1a365d}
+.btn-primary{background:#1a365d;color:#fff;padding:12px 20px;border-radius:10px;text-decoration:none;font-weight:700;font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,0.03)}
+.status{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;display:inline-block}
+.Pending{background:#fefcbf;color:#744210;border:1px solid #f6e05e}
+.Approved{background:#c6f6d5;color:#22543d;border:1px solid #9ae6b4}
+.Rejected{background:#fed7d7;color:#742a2a;border:1px solid #fc8181}
+.empty{background:#f7fafc;border:1px dashed #cbd5e0;border-radius:16px;padding:40px;text-align:center;color:#718096}
+</style>
 </head>
 <body>
-<header>
-    <h1>Legal Aid & Rights Awareness Portal</h1>
-    <p>User Dashboard</p>
-</header>
-<div class="container">
-    <div class="welcome">
-        <h2>Welcome, {{ session["user_name"] }}</h2>
-        <p>Welcome to your personal Legal Aid Dashboard.</p>
-        <a href="/legal-aid" class="button">Request Legal Aid</a>
-        <a href="/user-logout" class="button">Logout</a>
-    </div>
-    <div class="card">
-        <h3>My Legal Aid Requests</h3>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Subject</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Created At</th>
-            </tr>
-            {% for request in requests %}
-            <tr>
-                <td>{{ request[0] }}</td>
-                <td>{{ request[4] }}</td>
-                <td style="max-width:280px;">{{ request[5] }}</td>
-                <td>
-                    {% set s = request[6]|lower %}
-                    <span class="badge {% if s == 'approved' %}approved{% elif s == 'rejected' %}rejected{% else %}pending{% endif %}">{{ request[6] }}</span>
-                </td>
-                <td>{{ request[7].strftime('%d-%m-%Y %I:%M %p') if request[7].strftime is defined else request[7] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+<div class="nav">
+<b>⚖️ Karnataka Legal Aid Portal</b>
+<div>
+<a href="/legal-aid">+ New Request</a>
+<a href="/about">About</a>
+<a href="/user-logout">Logout</a>
 </div>
-<footer>
-    <p>© 2026 Legal Aid & Rights Awareness Portal</p>
-</footer>
+</div>
+<div class="wrap">
+<div class="top">
+<h2>Welcome, {{ session.get('user_name','User') }} 👋</h2>
+<a href="/legal-aid" class="btn-primary">+ Request Free Legal Aid</a>
+</div>
+
+{% if requests %}
+<div class="cards">
+{% for req in requests %}
+<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+<b style="color:#1a365d">{{ req[4] }}</b>
+<span class="status {{ req[6] }}">{{ req[6] }}</span>
+</div>
+<p style="font-size:13px;color:#4a5568;margin-bottom:8px"><b>ID:</b> LA{{ req[0] }} | <b>Date:</b> {{ req[7] if req|length>7 else 'Recently' }}</p>
+<p style="font-size:14px;line-height:1.5">{{ req[5][:150] }}...</p>
+<p style="margin-top:12px;font-size:12px;color:#2b6cb0;font-weight:600">📞 KSLSA 080-22111718 | 15100 | Advocate will call in 24hrs</p>
+</div>
+{% endfor %}
+</div>
+{% else %}
+<div class="empty">
+<h3>No requests yet</h3>
+<p style="margin-top:8px">Click "+ New Request" to get instant legal solution + free advocate.</p>
+<a href="/legal-aid" class="btn-primary" style="display:inline-block;margin-top:16px">Request Free Legal Aid</a>
+</div>
+{% endif %}
+</div>
 </body>
 </html>
