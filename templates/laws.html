@@ -1,171 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Laws - Legal Aid Portal</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #f4f7fb;
-            color: #333;
-        }
-
-        header {
-            background-color: #17365d;
-            color: white;
-            padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header h1 {
-            margin: 0;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-
-        .container h2 {
-            text-align: center;
-            color: #17365d;
-            margin-bottom: 30px;
-        }
-
-        .law-card {
-            background-color: white;
-            margin-bottom: 20px;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .law-card h3 {
-            color: #17365d;
-            margin-bottom: 12px;
-        }
-
-        .law-card p {
-            line-height: 1.6;
-        }
-
-        footer {
-            background-color: #17365d;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
-        }
-    </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laws - Legal Aid Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{font-family:'Inter',sans-serif;box-sizing:border-box;margin:0;padding:0} body{background:#fff;color:#1a202c;line-height:1.6}
+.navbar{background:#fff;border-bottom:1px solid #e2e8f0;padding:14px 28px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;box-shadow:0 1px 8px rgba(0,0,0,0.04)}
+.nav-logo{font-weight:800;color:#1a202c;font-size:18px}
+.nav-links{display:flex;gap:22px;align-items:center}
+.nav-links a{text-decoration:none;color:#4a5568;font-weight:600;font-size:14px}
+.nav-links a.active{color:#1a202c;border-bottom:2px solid #2b6cb0;padding-bottom:4px}
+.btn-login{border:1px solid #cbd5e0;padding:8px 16px;border-radius:8px}
+.btn-register{background:#2b6cb0;color:#fff!important;padding:8px 18px;border-radius:8px}
+.wrap{max-width:1100px;margin:36px auto;padding:0 20px}
+h1{font-size:36px;font-weight:800;color:#1a365d;text-align:center}
+.sub{text-align:center;color:#718096;margin:10px 0 32px}
+.law-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:24px;margin-bottom:16px;display:flex;gap:16px}
+.law-icon{width:48px;height:48px;background:#f7fafc;border:1px solid #e2e8f0;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.law-card h3{color:#1a365d;font-size:16px;margin-bottom:6px}
+.law-card p{font-size:13px;color:#4a5568}
+.sec{background:#f7fafc;border:1px dashed #cbd5e0;border-radius:8px;padding:8px 12px;font-size:11px;margin-top:10px;color:#2d3748;font-weight:600}
+</style>
 </head>
-
 <body>
+<div class="navbar">
+<div class="nav-logo">⚖️ Karnataka Legal Aid Portal</div>
+<div class="nav-links">
+<a href="/">Home</a><a href="/about">About</a><a href="/rights">Rights</a><a href="/laws" class="active">Laws</a><a href="/contact">Contact</a><a href="/legal-aid">Legal Aid</a>
+<a href="/login" class="btn-login">Login</a><a href="/register" class="btn-register">Register</a>
+</div>
+</div>
 
-    <header>
-        <h1>Legal Aid Portal</h1>
+<div class="wrap">
+<h1>Important Laws for Citizens - With Sections</h1>
+<p class="sub">Instant solution provided after you submit request - These laws will be cited in your case</p>
 
-        <nav>
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/rights">Rights</a>
-            <a href="/laws">Laws</a>
-            <a href="/contact">Contact</a>
-        </nav>
-    </header>
+<div class="law-card"><div class="law-icon">📜</div><div><h3>Legal Services Authority Act, 1987 - Sec 12</h3><p>Free legal aid for income < 3 Lakhs, SC/ST, Women, Children. Free advocate, court fee, paper book. NALSA Toll-Free 15100, KSLSA 080-22111718.</p><div class="sec">Section: Sec 12(a) to (h) - Criteria for free legal services | Punishment for violation: Contempt of Court</div></div></div>
 
-    <div class="container">
+<div class="law-card"><div class="law-icon">🛒</div><div><h3>Consumer Protection Act, 2019</h3><p>Product defect, service deficiency, fraud. File at 1915, consumerhelpline.gov.in. Get refund + compensation up to ₹10 Lakhs. DCDRC must decide in 45 days.</p><div class="sec">Section: Sec 2(7) Consumer, Sec 2(11) Deficiency, Sec 34(1) Jurisdiction | Helpline 1915</div></div></div>
 
-        <h2>Important Laws</h2>
-        <input
-    type="text"
-    id="lawSearch"
-    placeholder="Search for a law..."
-    onkeyup="searchLaws()"
-    style="width:100%; padding:12px; margin-bottom:25px; border:1px solid #ccc; border-radius:5px; font-size:16px;"
->
+<div class="law-card"><div class="law-icon">💻</div><div><h3>Information Technology Act, 2000</h3><p>Online fraud, hacking, OTP scam. GOLDEN HOUR - Report within 2 hrs at 1930 & cybercrime.gov.in. Bank must freeze transaction. Don't delete proof.</p><div class="sec">Section: Sec 43 Penalty for damage, Sec 66 Hacking (3 years), Sec 66C Identity theft, Sec 66D Cheating</div></div></div>
 
-        <div class="law-card">
-            <h3>Constitution of India</h3>
-            <p>
-                The Constitution of India is the supreme legal framework
-                of the country. It establishes the structure of government
-                and provides fundamental rights and duties.
-            </p>
-        </div>
+<div class="law-card"><div class="law-icon">👩‍⚖️</div><div><h3>Protection of Women from Domestic Violence Act, 2005</h3><p>Physical, mental, economic violence. Right to Residence (Sec 17), Protection Order (Sec 18), Monetary Relief. Call Women Helpline 181, 1091.</p><div class="sec">Section: Sec 12 Application to Magistrate, Sec 17 Right to residence, Sec 18 Protection order</div></div></div>
 
-        <div class="law-card">
-            <h3>Consumer Protection Act, 2019</h3>
-            <p>
-                This law provides a framework for protecting consumer
-                interests and addressing consumer complaints and disputes.
-            </p>
-        </div>
+<div class="law-card"><div class="law-icon">🏞️</div><div><h3>Karnataka Land Revenue Act, 1964 & Registration Act</h3><p>RTC, EC, Mutation, Kaveri portal. 12 years adverse possession. File injunction under CPC Order 39. Free DLSA lawyer for property dispute.</p><div class="sec">Section: KLR Sec 128 Record of Rights, Sec 129 Mutation | CPC Order 39 Injunction</div></div></div>
 
-        <div class="law-card">
-            <h3>Right to Information Act, 2005</h3>
-            <p>
-                The Right to Information framework allows eligible citizens
-                to seek information from public authorities, subject to
-                the provisions and exemptions of the law.
-            </p>
-        </div>
+<div class="law-card"><div class="law-icon">👷</div><div><h3>Labour Laws - Payment of Wages Act 1936 + MW Act 1948</h3><p>Salary must be paid by 7th. PF, ESI mandatory. Overtime double. If salary < ₹25000, free labour advocate from DLSA. File at Shram Suvidha portal.</p><div class="sec">Section: PW Act Sec 15 Claim, MW Act Sec 12 Payment of minimum wages | Helpline 1800-425-2667</div></div></div>
 
-        <div class="law-card">
-            <h3>Legal Services Authorities Act, 1987</h3>
-            <p>
-                This law provides the legal framework for legal services
-                authorities and the provision of free legal services to
-                eligible persons.
-            </p>
-        </div>
-
-        <div class="law-card">
-            <h3>Information Technology Act, 2000</h3>
-            <p>
-                The Information Technology Act provides a legal framework
-                relating to electronic records, electronic transactions
-                and specified offences involving computer resources.
-            </p>
-        </div>
-
-    </div>
-
-    <footer>
-        <p>© 2026 Legal Aid & Rights Awareness Portal</p>
-    </footer>
-<script>
-function searchLaws() {
-    let input = document.getElementById("lawSearch").value.toLowerCase();
-    let cards = document.getElementsByClassName("law-card");
-
-    for (let i = 0; i < cards.length; i++) {
-        let text = cards[i].innerText.toLowerCase();
-
-        if (text.includes(input)) {
-            cards[i].style.display = "block";
-        } else {
-            cards[i].style.display = "none";
-        }
-    }
-}
-</script>
+</div>
 </body>
-
 </html>
